@@ -1,0 +1,40 @@
+<div class="dashboard">
+  <h2>Task Dashboard (Completed: {{ completedTasksCount() }})</h2>
+
+  <!-- Handle Loading State -->
+  @if (loading()) {
+    <p class="loading-message">Loading tasks...</p>
+  } 
+  <!-- Handle Error State -->
+  @else if (error()) {
+    <p class="error-message">{{ error() }}</p>
+  } 
+  <!-- Handle Success State -->
+  @else {
+    <ul class="task-list">
+      @for (task of tasks(); track task.id) {
+        <li class="task-item" [class.completed]="task.completed">
+          <input type="checkbox" [checked]="task.completed" (change)="toggleCompletion(task.id)">
+          
+          <div class="task-details">
+            <h3 [routerLink]="['/tasks', task.id]" style="cursor: pointer; color: blue;">
+              {{ task.title | titlecase }}
+            </h3>
+            <p>{{ task.description | truncate:35 }}</p>
+            <small>Due: {{ task.dueDate | date:'mediumDate' }}</small>
+          </div>
+
+          <div class="task-priority">
+            @switch (task.priority) {
+              @case ('high') { <span class="badge high">🚨 High</span> }
+              @case ('medium') { <span class="badge medium">⚡ Medium</span> }
+              @case ('low') { <span class="badge low">🌱 Low</span> }
+            }
+          </div>
+        </li>
+      } @empty {
+        <li class="empty-state">No tasks available right now.</li>
+      }
+    </ul>
+  }
+</div>

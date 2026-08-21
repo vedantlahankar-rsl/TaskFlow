@@ -1,0 +1,36 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+.navbar {
+  background-color: #ffffff;
+  padding: 15px 20px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.navbar a {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+.navbar a:hover {
+  color: #0056b3;
+}
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
