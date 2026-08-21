@@ -1,0 +1,24 @@
+<div class="task-detail-container">
+  @if (task()) {
+    <a routerLink="/tasks" class="back-link">← Back to Tasks</a>
+    
+    <h2>{{ task()?.title | titlecase }}</h2>
+    <p class="description">{{ task()?.description }}</p>
+    
+    <div class="task-meta">
+      <p><strong>Status:</strong> {{ task()?.completed ? '✅ Completed' : '⏳ Pending' }}</p>
+      <p><strong>Due Date:</strong> {{ task()?.dueDate | date:'longDate' }}</p>
+      
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <strong>Priority:</strong>
+        @switch (task()?.priority) {
+          @case ('high') { <span class="badge high">🚨 High</span> }
+          @case ('medium') { <span class="badge medium">⚡ Medium</span> }
+          @case ('low') { <span class="badge low">🌱 Low</span> }
+        }
+      </div>
+    </div>
+  } @else {
+    <p class="loading-message">Loading task details...</p>
+  }
+</div>
